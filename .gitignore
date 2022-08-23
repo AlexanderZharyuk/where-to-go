@@ -131,3 +131,6 @@ dmypy.json
 #MacOS files
 .DS_Store
 .idea/
+
+#media
+media
