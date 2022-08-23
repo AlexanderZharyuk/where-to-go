@@ -6,11 +6,6 @@ class Place(models.Model):
         verbose_name='Название места',
         max_length=80
     )
-    images = models.ImageField(
-        verbose_name='Картинка места',
-        blank=True,
-        null=True
-    )
     description_short = models.TextField(
         verbose_name='Короткое описание'
     )
@@ -25,4 +20,24 @@ class Place(models.Model):
     )
 
     def __str__(self):
-        return f'{self.title}'
+        return f'{self.id}. {self.title}'
+
+
+class Image(models.Model):
+    place = models.ForeignKey(
+        to=Place,
+        verbose_name='Место',
+        related_name='images',
+        on_delete=models.CASCADE
+    )
+    images = models.ImageField(
+        upload_to='media/',
+        verbose_name='Картинки места'
+    )
+    is_main = models.BooleanField(
+        verbose_name='Главная фотография места',
+        default=False
+    )
+
+    def __str__(self):
+        return f'Картинка к {self.place.title}'

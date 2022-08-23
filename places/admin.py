@@ -1,6 +1,13 @@
 from django.contrib import admin
 
-from .models import Place
+from .models import Place, Image
 
 
-admin.site.register(Place)
+class PlaceImageInline(admin.TabularInline):
+    model = Image
+    extra = 1
+
+
+@admin.register(Place)
+class PlaceAdmin(admin.ModelAdmin):
+    inlines = [PlaceImageInline]
