@@ -1,8 +1,9 @@
 from django.shortcuts import render, get_object_or_404
 from django.templatetags.static import static
-from django.http import HttpResponse, JsonResponse
+from django.http import JsonResponse
+from django.urls import reverse
 
-from .models import Place, Image
+from .models import Place
 
 
 def show_index_page(request):
@@ -19,7 +20,7 @@ def show_index_page(request):
             "properties": {
                 "title": place.title,
                 "placeId": place.id,
-                "detailsUrl": static('places/moscow_legends.json')
+                "detailsUrl": reverse(get_place, args=[place.id])
             }
         }
         features.append(feature)
