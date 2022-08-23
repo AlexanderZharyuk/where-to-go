@@ -5,7 +5,7 @@ from .models import Place, Image
 
 class PlaceImageInline(admin.TabularInline):
     model = Image
-    extra = 1
+    extra = 0
 
 
 @admin.register(Place)

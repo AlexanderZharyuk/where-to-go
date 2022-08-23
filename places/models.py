@@ -34,9 +34,9 @@ class Image(models.Model):
         upload_to='media/',
         verbose_name='Картинки места'
     )
-    is_main = models.BooleanField(
-        verbose_name='Главная фотография места',
-        default=False
+    position = models.IntegerField(
+        verbose_name='Позиция',
+        default=0
     )
 
     def __str__(self):
