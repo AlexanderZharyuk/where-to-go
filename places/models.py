@@ -22,6 +22,9 @@ class Place(models.Model):
     def __str__(self):
         return f'{self.id}. {self.title}'
 
+    class Meta:
+        ordering = ['title']
+
 
 class Image(models.Model):
     place = models.ForeignKey(
@@ -41,3 +44,6 @@ class Image(models.Model):
 
     def __str__(self):
         return f'Картинка к {self.place.title}'
+
+    class Meta:
+        ordering = ['position']
