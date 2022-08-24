@@ -30,7 +30,7 @@ class Image(models.Model):
         related_name='images',
         on_delete=models.CASCADE
     )
-    images = models.ImageField(
+    image = models.ImageField(
         upload_to='media/',
         verbose_name='Картинки места'
     )

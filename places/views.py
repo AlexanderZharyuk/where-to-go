@@ -36,7 +36,8 @@ def show_index_page(request):
 
 def get_place(request, place_id):
     place = get_object_or_404(Place, pk=place_id)
-    images_urls = [image.images.url for image in place.images.all()]
+    images_urls = [founded_place.image.url for founded_place
+                   in place.images.all()]
     json_response = {
         'title': place.title,
         'imgs': images_urls,
