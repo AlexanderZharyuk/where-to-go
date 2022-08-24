@@ -16,10 +16,9 @@ class PlaceImageInline(SortableTabularInline):
             '<img src="{0}" style="width: auto; height:200px;" />'
             .format(obj.image.url)
         )
+    preview_image.short_description = 'Превью'
 
 
 @admin.register(Place)
 class PlaceAdmin(SortableAdminMixin, admin.ModelAdmin):
     inlines = [PlaceImageInline]
-
-
