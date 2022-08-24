@@ -24,6 +24,8 @@ class Place(models.Model):
         return f'{self.id}. {self.title}'
 
     class Meta:
+        verbose_name_plural = 'Места'
+        verbose_name = 'место'
         ordering = ['title']
 
 
