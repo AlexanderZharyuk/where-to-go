@@ -25,12 +25,12 @@ pip install requirements.txt
 DJANGO_SECRET_KEY=<YOUR-DJANGO-SECRET-KEY>
 DEBUG=True
 ALLOWED_HOSTS=*
-CSRF_COOKIE_SECURE=True
-SESSION_COOKIE_SECURE=True
+CSRF_COOKIE_SECURE=False
+SESSION_COOKIE_SECURE=False
 SECURE_HSTS_SECONDS=0
-SECURE_HSTS_INCLUDE_SUBDOMAINS=True
+SECURE_HSTS_INCLUDE_SUBDOMAINS=False
 SECURE_HSTS_PRELOAD=False
-SECURE_SSL_REDIRECT=True
+SECURE_SSL_REDIRECT=False
 ```
 
 ## Запуск сайта
@@ -53,6 +53,9 @@ python3 manage.py runserver
 ```shell
 python3 manage.py load_place <url на json-файл с данными о месте>
 ```
+Как должен выглядеть json-файл?
+
+Шаблон файла с данными о каком-то месте лежит в файле `examples/place_example.json`
 
 ## Автор
 * [Alexander Zharyuk](https://github.com/AlexanderZharyuk)
