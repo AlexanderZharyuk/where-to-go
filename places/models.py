@@ -26,7 +26,6 @@ class Place(models.Model):
     class Meta:
         verbose_name_plural = 'Места'
         verbose_name = 'место'
-        ordering = ['title']
 
 
 class Image(models.Model):
@@ -49,4 +48,4 @@ class Image(models.Model):
         return f'Картинка к {self.place.title}'
 
     class Meta:
-        ordering = ['position']
+        ordering = ['-position']
