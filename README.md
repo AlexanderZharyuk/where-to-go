@@ -1,6 +1,12 @@
 # WHERE TO GO
 Сайт с интересными локациями в Москве.
 
+Демка сайта: [https://realvizy.pythonanywhere.com/](https://realvizy.pythonanywhere.com/)
+
+Превью:
+![site preview](https://user-images.githubusercontent.com/103115934/186663184-dcbcb7c5-0818-4618-9ca6-1c735a2b78b6.png)
+
+
 ## Фишки проекта
 В данном проекте реализованы:
 1. Админка, для удобного добавления новых мест на карте
