@@ -43,12 +43,12 @@ class Place(models.Model):
         ]
     )
 
-    def __str__(self):
-        return f'{self.id}. {self.title}'
-
     class Meta:
         verbose_name_plural = 'Места'
         verbose_name = 'место'
+
+    def __str__(self):
+        return f'{self.id}. {self.title}'
 
 
 class Image(models.Model):
@@ -67,8 +67,8 @@ class Image(models.Model):
         default=0
     )
 
-    def __str__(self):
-        return f'Картинка к {self.place.title}'
-
     class Meta:
         ordering = ['-position']
+
+    def __str__(self):
+        return f'Картинка к {self.place.title}'
