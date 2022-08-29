@@ -38,7 +38,7 @@ class Command(BaseCommand):
                     'Найдено несколько записей в БД с этим местом'
                 )
             )
-            return 
+            return
 
         if created:
             for image_url in parsed_place['imgs']:
@@ -55,12 +55,12 @@ class Command(BaseCommand):
 
             self.stdout.write(
                 self.style.SUCCESS(
-                    'Место "%s" успешно занесено в БД.' % parsed_place['title']
+                    f'Место {parsed_place["title"]} успешно занесено в БД.'
                 )
             )
         else:
             self.stdout.write(
                 self.style.WARNING(
-                    'Место "%s" уже есть в БД.' % parsed_place['title']
+                    f'Место {parsed_place["title"]} уже есть в БД.'
                 )
             )
