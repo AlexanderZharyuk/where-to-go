@@ -100,6 +100,6 @@ CSRF_COOKIE_SECURE = env.bool('CSRF_COOKIE_SECURE', False)
 SESSION_COOKIE_SECURE = env.bool('SESSION_COOKIE_SECURE', False)
 SECURE_HSTS_SECONDS = env.int('SECURE_HSTS_SECONDS', 0)
 SECURE_HSTS_INCLUDE_SUBDOMAINS = env.bool('SECURE_HSTS_INCLUDE_SUBDOMAINS',
-                                   False)
+                                          False)
 SECURE_HSTS_PRELOAD = env.bool('SECURE_HSTS_PRELOAD', False)
 SECURE_SSL_REDIRECT = env.bool('SECURE_SSL_REDIRECT', False)
