@@ -27,27 +27,26 @@ def show_index_page(request):
         "features": features
     }
 
-    data = {'places': places}
-    return render(request, 'index.html', context=data)
+    return render(request, 'index.html', context={'places': places})
 
 
 def get_place(request, place_id):
-    place = get_object_or_404(Place, pk=place_id)
+    founded_place = get_object_or_404(Place, pk=place_id)
     images_urls = [founded_place.image.url for founded_place
-                   in place.images.all()]
-    json_response = {
-        'title': place.title,
+                   in founded_place.images.all()]
+    place = {
+        'title': founded_place.title,
         'imgs': images_urls,
-        'description_short': place.description_short,
-        'description_long': place.description_long,
+        'description_short': founded_place.description_short,
+        'description_long': founded_place.description_long,
         'coordinates': {
-            'lng': place.longitude,
-            'lat': place.latitude
+            'lng': founded_place.longitude,
+            'lat': founded_place.latitude
         }
     }
 
     return JsonResponse(
-        json_response,
+        place,
         safe=False,
         json_dumps_params={
             'ensure_ascii': False,
