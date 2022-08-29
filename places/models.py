@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.validators import MinValueValidator, MaxValueValidator
 from tinymce.models import HTMLField
 
 
@@ -16,10 +17,30 @@ class Place(models.Model):
         blank=True
     )
     latitude = models.FloatField(
-        verbose_name='Широта'
+        verbose_name='Широта',
+        validators=[
+            MinValueValidator(
+                -90,
+                message='Широта не может быть меньше -90°'
+            ),
+            MaxValueValidator(
+                90,
+                message='Широта не может быть больше 90°'
+            )
+        ]
     )
     longitude = models.FloatField(
-        verbose_name='Долгота'
+        verbose_name='Долгота',
+        validators=[
+            MinValueValidator(
+                -180,
+                message='Долгота не может быть меньше -180°'
+            ),
+            MaxValueValidator(
+                180,
+                message='Долгота не может быть больше 180°'
+            )
+        ]
     )
 
     def __str__(self):
