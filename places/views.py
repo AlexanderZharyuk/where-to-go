@@ -47,9 +47,7 @@ def get_place(request, place_id):
 
     return JsonResponse(
         place,
-        safe=False,
         json_dumps_params={
-            'ensure_ascii': False,
-            'indent': 4
+            'ensure_ascii': False
         }
     )

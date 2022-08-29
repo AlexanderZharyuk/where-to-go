@@ -2,7 +2,7 @@ import os
 
 import requests
 
-from django.core.management.base import BaseCommand, CommandError
+from django.core.management.base import BaseCommand
 from django.core.files.base import ContentFile
 
 from places.models import Place, Image
@@ -37,14 +37,11 @@ class Command(BaseCommand):
                 response.raise_for_status()
 
                 image_name = os.path.split(image_url)[-1]
-                image = response.content
-                prepared_image = ContentFile(image)
+                image = ContentFile(response.content, name=image_name)
 
-                created_image_for_place = Image.objects.create(place=place)
-                created_image_for_place.image.save(
-                    image_name,
-                    prepared_image,
-                    save=True
+                Image.objects.create(
+                    place=place,
+                    image=image
                 )
 
             self.stdout.write(
