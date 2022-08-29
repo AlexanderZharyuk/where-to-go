@@ -4,6 +4,7 @@ import requests
 
 from django.core.management.base import BaseCommand
 from django.core.files.base import ContentFile
+from django.core.exceptions import MultipleObjectsReturned
 
 from places.models import Place, Image
 
@@ -19,17 +20,25 @@ class Command(BaseCommand):
         response.raise_for_status()
 
         parsed_place = response.json()
-        place, created = Place.objects.get_or_create(
-            title=parsed_place['title'],
-            defaults={
-                'description_short': parsed_place.setdefault(
-                    'description_short', ''),
-                'description_long': parsed_place.setdefault(
-                    'description_long', ''),
-                'longitude': parsed_place['coordinates']['lng'],
-                'latitude': parsed_place['coordinates']['lat']
-            },
-        )
+        try:
+            place, created = Place.objects.get_or_create(
+                title=parsed_place['title'],
+                defaults={
+                    'description_short': parsed_place.setdefault(
+                        'description_short', ''),
+                    'description_long': parsed_place.setdefault(
+                        'description_long', ''),
+                    'longitude': parsed_place['coordinates']['lng'],
+                    'latitude': parsed_place['coordinates']['lat']
+                },
+            )
+        except MultipleObjectsReturned:
+            self.stdout.write(
+                self.style.WARNING(
+                    'Найдено несколько записей в БД с этим местом'
+                )
+            )
+            return 
 
         if created:
             for image_url in parsed_place['imgs']:
