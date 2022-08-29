@@ -13,10 +13,9 @@ class PlaceImageInline(SortableInlineAdminMixin, admin.TabularInline):
 
     def preview_image(self, obj, max_height='200px'):
         return format_html(
-            '<img src="{url}" height="{max_height}" />'.format(
-                url=obj.image.url,
-                max_height=max_height
-            )
+            '<img src="{url}" height="{max_height}" />',
+            url=obj.image.url,
+            max_height=max_height
         )
     preview_image.short_description = 'Превью'
 
