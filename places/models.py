@@ -8,10 +8,12 @@ class Place(models.Model):
         max_length=80
     )
     description_short = models.TextField(
-        verbose_name='Короткое описание'
+        verbose_name='Короткое описание',
+        blank=True
     )
     description_long = HTMLField(
-        verbose_name='Подробное описание'
+        verbose_name='Подробное описание',
+        blank=True
     )
     latitude = models.FloatField(
         verbose_name='Широта'
