@@ -36,7 +36,7 @@ class Image(models.Model):
         on_delete=models.CASCADE
     )
     image = models.ImageField(
-        upload_to='media/',
+        upload_to='places/',
         verbose_name='Картинки места'
     )
     position = models.IntegerField(
