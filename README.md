@@ -4,10 +4,6 @@
 - Демка сайта: [https://realvizy.pythonanywhere.com/](https://realvizy.pythonanywhere.com/)
 - Для входа в админку перейдите по адресу [https://realvizy.pythonanywhere.com/admin/](https://realvizy.pythonanywhere.com/admin/)
 
-Данные для входа:
-
-Логин / Пароль: admin / admin
- 
 
 Превью:
 ![site preview](https://user-images.githubusercontent.com/103115934/186663184-dcbcb7c5-0818-4618-9ca6-1c735a2b78b6.png)
