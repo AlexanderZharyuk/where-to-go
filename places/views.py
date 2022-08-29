@@ -7,10 +7,8 @@ from .models import Place
 
 def show_index_page(request):
     places = Place.objects.all()
-    features = []
-
-    for place in places:
-        feature = {
+    features = [
+        {
             "type": "Feature",
             "geometry": {
                 "type": "Point",
@@ -21,8 +19,8 @@ def show_index_page(request):
                 "placeId": place.id,
                 "detailsUrl": reverse(get_place, args=[place.id])
             }
-        }
-        features.append(feature)
+        } for place in places
+    ]
 
     places = {
         "type": "FeatureCollection",
