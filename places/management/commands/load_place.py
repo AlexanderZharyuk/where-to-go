@@ -2,6 +2,8 @@ import os
 
 import requests
 
+from urllib.parse import urlsplit
+
 from django.core.management.base import BaseCommand
 from django.core.files.base import ContentFile
 from django.core.exceptions import MultipleObjectsReturned
@@ -9,31 +11,19 @@ from django.core.exceptions import MultipleObjectsReturned
 from places.models import Place, Image
 
 
-def create_new_place(parsed_place: dict):
-    return Place.objects.get_or_create(
-        title=parsed_place['title'],
-        defaults={
-            'description_short': parsed_place.setdefault(
-                'description_short', ''),
-            'description_long': parsed_place.setdefault(
-                'description_long', ''),
-            'longitude': parsed_place['coordinates']['lng'],
-            'latitude': parsed_place['coordinates']['lat']
-        },
-    )
+def save_place_images(place, place_images):
+    for image_url in place_images:
+        response = requests.get(image_url)
+        response.raise_for_status()
 
+        image_filepath = os.path.split(image_url)[-1]
+        image_filename = urlsplit(image_filepath).path
+        image = ContentFile(response.content, name=image_filename)
 
-def save_place_images(place, image_url):
-    response = requests.get(image_url)
-    response.raise_for_status()
-
-    image_name = os.path.split(image_url)[-1]
-    image = ContentFile(response.content, name=image_name)
-
-    Image.objects.create(
-        place=place,
-        image=image
-    )
+        Image.objects.create(
+            place=place,
+            image=image
+        )
 
 
 class Command(BaseCommand):
@@ -48,7 +38,15 @@ class Command(BaseCommand):
 
         parsed_place = response.json()
         try:
-            place, created = create_new_place(parsed_place)
+            place, created = Place.objects.get_or_create(
+                title=parsed_place['title'],
+                defaults={
+                    'description_short': parsed_place.get('description_short'),
+                    'description_long': parsed_place.get('description_long'),
+                    'longitude': parsed_place['coordinates']['lng'],
+                    'latitude': parsed_place['coordinates']['lat']
+                },
+            )
         except MultipleObjectsReturned:
             self.stdout.write(
                 self.style.WARNING(
@@ -58,9 +56,8 @@ class Command(BaseCommand):
             return
 
         if created:
-            for image_url in parsed_place['imgs']:
-                save_place_images(place, image_url)
-                
+            save_place_images(place, parsed_place['imgs'])
+
             self.stdout.write(
                 self.style.SUCCESS(
                     f'Место {parsed_place["title"]} успешно занесено в БД.'
