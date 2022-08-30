@@ -24,16 +24,16 @@ def create_new_place(parsed_place: dict):
 
 
 def save_place_images(place, image_url):
-        response = requests.get(image_url)
-        response.raise_for_status()
+    response = requests.get(image_url)
+    response.raise_for_status()
 
-        image_name = os.path.split(image_url)[-1]
-        image = ContentFile(response.content, name=image_name)
+    image_name = os.path.split(image_url)[-1]
+    image = ContentFile(response.content, name=image_name)
 
-        Image.objects.create(
-            place=place,
-            image=image
-        )
+    Image.objects.create(
+        place=place,
+        image=image
+    )
 
 
 class Command(BaseCommand):
