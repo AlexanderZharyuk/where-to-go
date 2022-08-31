@@ -41,8 +41,12 @@ class Command(BaseCommand):
             place, created = Place.objects.get_or_create(
                 title=parsed_place['title'],
                 defaults={
-                    'description_short': parsed_place.get('description_short'),
-                    'description_long': parsed_place.get('description_long'),
+                    'description_short': parsed_place.get(
+                        'description_short', ''
+                    ),
+                    'description_long': parsed_place.get(
+                        'description_long', ''
+                    ),
                     'longitude': parsed_place['coordinates']['lng'],
                     'latitude': parsed_place['coordinates']['lat']
                 },
