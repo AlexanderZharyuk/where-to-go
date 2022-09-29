@@ -1,28 +1,28 @@
 # WHERE TO GO
-Сайт с интересными локациями в Москве.
+Website with interesting locations in Moscow.
 
-- Демка сайта: [https://realvizy.pythonanywhere.com/](https://realvizy.pythonanywhere.com/)
-- Для входа в админку перейдите по адресу [https://realvizy.pythonanywhere.com/admin/](https://realvizy.pythonanywhere.com/admin/)
-
-
-Превью:
-![site preview](https://user-images.githubusercontent.com/103115934/186663184-dcbcb7c5-0818-4618-9ca6-1c735a2b78b6.png)
+- Website demo: [https://realvizy.pythonanywhere.com/](https://realvizy.pythonanywhere.com/)
+- To login to the admin panel go to [https://realvizy.pythonanywhere.com/admin/](https://realvizy.pythonanywhere.com/admin/)
 
 
-## Фишки проекта
-В данном проекте реализованы:
-1. Админка, для удобного добавления новых мест на карте
-2. Карта с местами, их описаниями и картинками
-3. Получение подробных данных о месте по API
-4. Кастомная команда для загрузки места через json-файл
+Preview:
+![site preview]
 
-## Предустановка
-Для запуска сайта на локальном сервере, установите зависимости в виртуальное окружение командой:
+
+## Features of the project
+This project implemented:
+1. Admin panel for easy adding of new places on the map
+2. Map with places, their descriptions and pictures
+3. Getting detailed data about the place via API
+4. Custom command to load location via json file
+
+## Setting up your development environment
+To run the site on a local server, install the dependencies in the virtual environment with the command:
 ```shell
 pip install -r requirements.txt
 ```
 
-А также настройте переменные окружения в `.env`-файле:
+And also set environment variables in `.env` file:
 ```
 DJANGO_SECRET_KEY=<YOUR-DJANGO-SECRET-KEY>
 DEBUG=True
@@ -36,29 +36,29 @@ SECURE_SSL_REDIRECT=False
 STATIC_ROOT=<YOUR-STATIC-FOLDER-ABSOLUTE-PATH>
 ```
 
-## Запуск сайта
-Выполните миграции: 
+## Site launch
+Run the migrations:
 ```shell
 python3 manage.py migrate
 ```
-Создайте свой аккаунт в админке:
+Create your admin account:
 ```shell
 python3 manage.py createsuperuser
 ```
-Запустите сервер:
+Start the server:
 ```shell
 python3 manage.py runserver
 ```
-После чего ваш сайт запуститься по адресу [http://127.0.0.1:8000/](http://127.0.0.1:8000/), админка будет доступна по адресу [http://127.0.0.1:8000/admin/](http://127.0.0.1:8000/admin/).
+After that, your site will be launched at [http://127.0.0.1:8000/](http://127.0.0.1:8000/), the admin panel will be available at [http://127.0.0.1:8000/admin/ ](http://127.0.0.1:8000/admin/).
 
-## Добавление новых мест
-Вы можете добавлять новые места напрямую через админку или при помощи кастомной команды:
+## Adding new places
+You can add new places directly through the admin panel or with a custom command:
 ```shell
-python3 manage.py load_place <url на json-файл с данными о месте>
+python3 manage.py load_place <url to json file with place data>
 ```
-Как должен выглядеть json-файл?
+What should the json file look like?
 
-Шаблон файла с данными о каком-то месте лежит в файле `examples/place_example.json`
+The template for a file with data about some place is in the file `examples/place_example.json`
 
-## Автор
+## Author
 * [Alexander Zharyuk](https://github.com/AlexanderZharyuk)
